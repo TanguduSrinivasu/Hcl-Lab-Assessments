@@ -1,0 +1,10 @@
+create table customer_master(customer_number int,firstname varchar(25),secondname varchar(25),customer_city varchar(25));
+insert into customer_master values(1,"hanu","sai","Rajahmundry");
+insert into customer_master values(2,"usha","kiran","Visakhapatnam");
+insert into customer_master values(3,"sai","pavan","Amalapuram");
+insert into customer_master values(4,"sharan","kumar","Tekkali");
+insert into customer_master values(5,"siva","prasad","Tekkali");
+insert into customer_master values(6,"sujan","banna","Visakhapatnam");
+insert into customer_master values(7,"sagar","Gude","Hyderabad");
+insert into customer_master values(8,"uma","shanker","Chennai");
+insert into customer_master values(9,"hari","kumar","Bangalore");

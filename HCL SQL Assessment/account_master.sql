@@ -1,0 +1,12 @@
+create table account_master(customer_number int,account_number int,account_opening_date date);
+insert into account_master values(1,12222,"2017-11-11");
+insert into account_master values(2,15221,"2020-08-22");
+insert into account_master values(3,16222,"2016-01-31");
+insert into account_master values(4,17523,"2014-12-12");
+insert into account_master values(5,15224,"2019-03-03");
+insert into account_master values(6,10225,"2015-05-18");
+insert into account_master values(7,11226,"2016-07-25");
+insert into account_master values(8,0,"2014-02-24");
+insert into account_master values(1,14222,"2017-11-11");
+insert into account_master values(2,11221,"2020-08-20");
+insert into account_master values(3,13222,"2016-01-11");

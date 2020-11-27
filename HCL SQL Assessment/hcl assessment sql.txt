@@ -1,0 +1,176 @@
+create table customer_master(customer_number int,firstname varchar(25),secondname varchar(25),customer_city varchar(25));
+insert into customer_master values(1,"hanu","sai","Rajahmundry");
+insert into customer_master values(2,"usha","kiran","Visakhapatnam");
+insert into customer_master values(3,"sai","pavan","Amalapuram");
+insert into customer_master values(4,"sharan","kumar","Tekkali");
+insert into customer_master values(5,"siva","prasad","Tekkali");
+insert into customer_master values(6,"sujan","banna","Visakhapatnam");
+insert into customer_master values(7,"sagar","Gude","Hyderabad");
+insert into customer_master values(8,"uma","shanker","Chennai");
+insert into customer_master values(9,"hari","kumar","Bangalore");
+
+select * from customer_master;
++-----------------+-----------+------------+---------------+
+| customer_number | firstname | secondname | customer_city |
++-----------------+-----------+------------+---------------+
+|               1 | hanu      | sai        | Rajahmundry   |
+|               2 | usha      | kiran      | Visakhapatnam |
+|               3 | sai       | pavan      | Amalapuram    |
+|               4 | sharan    | kumar      | Tekkali       |
+|               5 | siva      | prasad     | Tekkali       |
+|               6 | sujan     | banna      | Visakhapatnam |
+|               7 | sagar     | Gude       | Hyderabad     |
+|               8 | uma       | shanker    | Chennai       |
+|               9 | hari      | kumar      | Bangalore     |
++-----------------+-----------+------------+---------------+
+9 rows in set (0.00 sec)
+
+
+create table account_master(customer_number int,account_number int,account_opening_date date);
+insert into account_master values(1,12222,"2017-11-11");
+insert into account_master values(2,15221,"2020-08-22");
+insert into account_master values(3,16222,"2016-01-31");
+insert into account_master values(4,17523,"2014-12-12");
+insert into account_master values(5,15224,"2019-03-03");
+insert into account_master values(6,10225,"2015-05-18");
+insert into account_master values(7,11226,"2016-07-25");
+insert into account_master values(8,0,"2014-02-24");
+insert into account_master values(1,14222,"2017-11-11");
+insert into account_master values(2,11221,"2020-08-20");
+insert into account_master values(3,13222,"2016-01-11");
+
+select * from account_master;
++-----------------+----------------+----------------------+
+| customer_number | account_number | account_opening_date |
++-----------------+----------------+----------------------+
+|               1 |          12222 | 2017-11-11           |
+|               2 |          15221 | 2020-08-22           |
+|               3 |          16222 | 2016-01-31           |
+|               4 |          17523 | 2014-12-12           |
+|               5 |          15224 | 2019-03-03           |
+|               6 |          10225 | 2015-05-18           |
+|               7 |          11226 | 2016-07-25           |
+|               8 |              0 | 2014-02-24           |
+|               1 |          14222 | 2017-11-11           |
+|               2 |          11221 | 2020-08-20           |
+|               3 |          13222 | 2016-01-11           |
++-----------------+----------------+----------------------+
+11 rows in set (0.00 sec)
+
+
+create table loan_details(customer_number int,LoanApproval varchar(5));
+insert into loan_details values(1,"Yes");
+insert into loan_details values(2,"No");
+insert into loan_details values(3,"Yes");
+insert into loan_details values(4,"Yes");
+insert into loan_details values(5,"Yes");
+insert into loan_details values(6,"No");
+insert into loan_details values(7,"Yes");
+
+ select * from loan_details;
++-----------------+--------------+
+| customer_number | LoanApproval |
++-----------------+--------------+
+|               1 | Yes          |
+|               2 | No           |
+|               3 | Yes          |
+|               4 | Yes          |
+|               5 | Yes          |
+|               6 | No           |
+|               7 | Yes          |
++-----------------+--------------+
+7 rows in set (0.00 sec)
+
+
+1) SELECT account_number,am.customer_number,firstname,secondname,account_opening_date from 
+customer_master cm INNER JOIN account_master am ON cm.customer_number=am.customer_number ORDER BY account_number;
++----------------+-----------------+-----------+------------+----------------------+
+| account_number | customer_number | firstname | secondname | account_opening_date |
++----------------+-----------------+-----------+------------+----------------------+
+|              0 |               8 | uma       | shanker    | 2014-02-24           |
+|          10225 |               6 | sujan     | banna      | 2015-05-18           |
+|          11221 |               2 | usha      | kiran      | 2020-08-20           |
+|          11226 |               7 | sagar     | Gude       | 2016-07-25           |
+|          12222 |               1 | hanu      | sai        | 2017-11-11           |
+|          13222 |               3 | sai       | pavan      | 2016-01-11           |
+|          14222 |               1 | hanu      | sai        | 2017-11-11           |
+|          15221 |               2 | usha      | kiran      | 2020-08-22           |
+|          15224 |               5 | siva      | prasad     | 2019-03-03           |
+|          16222 |               3 | sai       | pavan      | 2016-01-31           |
+|          17523 |               4 | sharan    | kumar      | 2014-12-12           |
++----------------+-----------------+-----------+------------+----------------------+
+11 rows in set (0.00 sec)
+
+
+2) SELECT count(customer_number) Cust_Count FROM customer_master WHERE customer_city='Chennai';
++------------+
+| Cust_Count |
++------------+
+|          1 |
++------------+
+1 row in set (0.00 sec)
+
+
+3) SELECT  am.customer_number, firstname, account_number
+FROM customer_master cm INNER JOIN account_master am
+ON cm.customer_number=am.customer_number
+WHERE extract(day from account_opening_date)>15 ORDER BY am.customer_number, account_number;
++-----------------+-----------+----------------+
+| customer_number | firstname | account_number |
++-----------------+-----------+----------------+
+|               2 | usha      |          11221 |
+|               2 | usha      |          15221 |
+|               3 | sai       |          16222 |
+|               6 | sujan     |          10225 |
+|               7 | sagar     |          11226 |
+|               8 | uma       |              0 |
++-----------------+-----------+----------------+
+6 rows in set (0.00 sec)
+
+
+4) SELECT count(customer_number) Count_Customer FROM customer_master
+WHERE customer_number NOT IN (SELECT customer_number FROM account_master);
++----------------+
+| Count_Customer |
++----------------+
+|              1 |
++----------------+
+1 row in set (0.00 sec)
+
+
+5)  select firstname FROM customer_master cm INNER JOIN account_master am 
+ON cm.customer_number=am.customer_number group by firstname having count(account_number)>1 order by firstname;
++-----------+
+| firstname |
++-----------+
+| hanu      |
+| sai       |
+| usha      |
++-----------+
+3 rows in set (0.00 sec)
+
+
+6)   SELECT count(ld.customer_number) Count FROM customer_master cm INNER JOIN loan_details ld
+ON  cm.customer_number=ld.customer_number WHERE cm.customer_number NOT IN ( SELECT customer_number FROM account_master);
++-------+
+| Count |
++-------+
+|     0 |
++-------+
+1 row in set (0.00 sec)
+
+
+7)  SELECT firstname FROM customer_master INNER JOIN account_master
+ ON customer_master.customer_number=account_master.customer_number GROUP BY firstname having count(firstname)>=2 order by firstname;
++-----------+
+| firstname |
++-----------+
+| hanu      |
+| sai       |
+| usha      |
++-----------+
+3 rows in set (0.00 sec)
+
+
+*****************************************************************************************************************************************************************
+
